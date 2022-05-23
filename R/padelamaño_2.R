@@ -102,3 +102,4 @@ padelamaño_2<-function(g1,g2=NA,g3=NA,p1,p2=NA,p3=NA, ausencia=FALSE,empate=FAL
     arrange(num_partido)%>%
     select(num_partido,resultado,jugador,fecha)
 }
+
