@@ -1,0 +1,10 @@
+Package: padelamano
+Type: Package
+Title: Cálculo de Puntos de Liga Pádelamaño
+Version: 0.1.0
+Author: jesuscanseco2
+Maintainer: jesuscanseco2 <jesus.felipe.canseco@gmail.com>
+Description: Funciones para calcular los puntos elo en partidos o juegos 2v2 de una liga privada.
+License: none
+Encoding: UTF-8
+LazyData: true
