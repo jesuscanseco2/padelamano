@@ -11,7 +11,7 @@ ver_gráficos<-function (){
 
 
 
-  uno<-ggplot(tabla,aes(fecha,puntos,color=jugador))+
+  uno<<-ggplot(tabla,aes(fecha,puntos,color=jugador))+
     geom_point()+
     geom_line()+
     facet_wrap(vars(jugador),ncol=5,nrow = 2)+
@@ -23,7 +23,7 @@ ver_gráficos<-function (){
 
 
 
-  dos<-ggplot(tabla,aes(jugados,puntos,color=jugador))+
+  dos<<-ggplot(tabla,aes(jugados,puntos,color=jugador))+
     geom_point()+
     geom_line()+
     geom_hline(yintercept=1000, linetype="dashed", color = "red")+
@@ -35,7 +35,7 @@ ver_gráficos<-function (){
 
 
 
-  tres<-ggplot(último_jug2,aes(reorder(jugador, -puntos,sum),puntos,fill=jugador))+
+  tres<<-ggplot(último_jug2,aes(reorder(jugador, -puntos,sum),puntos,fill=jugador))+
     geom_col()+
     coord_cartesian(ylim=c(min(último_jug2$puntos)-10,max(último_jug2$puntos)+10))+
     geom_text(aes(label = puntos),vjust=-.5)+
@@ -44,8 +44,8 @@ ver_gráficos<-function (){
     scale_fill_hue()+
     annotate("text",label=as.character(max(último_jug$fecha)),y=Inf,x=Inf,vjust=1,hjust=1)
 
-  ss<-tableGrob(tabla_general[,-7])
+  tabla_imagen<<-tableGrob(tabla_general[,-7])
 
-  plot(ss)
+  plot(tabla_imagen)
   list(uno,dos,tres)
 }
