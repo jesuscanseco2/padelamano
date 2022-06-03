@@ -1,4 +1,4 @@
-padelamaño_2<-function(g1,g2=NA,g3=NA,p1,p2=NA,p3=NA, ausencia=FALSE,empate=FALSE,fecha=NA){
+padelamaño_2<-function(g1,g2=NA,g3=NA,p1,p2=NA,p3=NA, ausencia=FALSE,empate=FALSE,fecha=NA,premio=0,castigo=0,especial=FALSE){
 
   jugadores_v<-c(g1,g2,g3,p1,p2,p3)
   puntos_ant<-c(0,0,0,0,0,0)
@@ -63,6 +63,10 @@ padelamaño_2<-function(g1,g2=NA,g3=NA,p1,p2=NA,p3=NA, ausencia=FALSE,empate=FAL
     ifelse(is.na(p3),nada<-"nada",tabla<<-rbind(tabla,tibble(jugador=p3,puntos=puntos_ant[6]-12,jugados=jugados_ant[6]+1,ganados=ganados_ant[6],empatados=empatados_ant[6]+1,perdidos=perdidos_ant[6],fecha=ymd(fecha))))
 
     partidos<<-rbind(partidos,tibble(num_partido=max_partido+1,ganador_1=g1,ganador_2=ifelse(is.na(g2),NA,g2),perdedor_1=p1,perdedor_2=ifelse(is.na(p2),NA,p2),perdedor_3=ifelse(is.na(p3),NA,p3),empate=FALSE,ausencia=TRUE,fecha=ymd(fecha)))
+  } else if (especial==TRUE){
+
+    ifelse(is.na(g1),nada<-"nada",tabla<<-rbind(tabla,tibble(jugador=g1,puntos=puntos_ant[1]+premio,jugados=jugados_ant[1],ganados=ganados_ant[1],empatados=empatados_ant[1],perdidos=perdidos_ant[1],fecha=ymd(fecha))))
+    ifelse(is.na(p1),nada<-"nada",tabla<<-rbind(tabla,tibble(jugador=p1,puntos=puntos_ant[4]-castigo,jugados=jugados_ant[4],ganados=ganados_ant[4],empatados=empatados_ant[4],perdidos=perdidos_ant[4],fecha=ymd(fecha))))
 
   } else {
     tabla<<-rbind(tabla,tibble(jugador=g1,puntos=puntos_ant[1]+40*(1-1/(1+10**((promedio_perdedor-promedio_ganador)/400))),jugados=jugados_ant[1]+1,ganados=ganados_ant[1]+1,empatados=empatados_ant[1],perdidos=perdidos_ant[1],fecha=ymd(fecha)))
