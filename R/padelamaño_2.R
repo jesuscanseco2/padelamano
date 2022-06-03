@@ -80,7 +80,7 @@ padelamaño_2<-function(g1=NA,g2=NA,g3=NA,p1=NA,p2=NA,p3=NA, ausencia=FALSE,empa
   # Creación de tabla general con los últimos resultados de puntos
   tabla_general<<-tabla%>%
     group_by(jugador)%>%
-    filter(jugados==max(jugados))%>%
+    filter(jugados==max(fecha))%>%
     ungroup()%>%
     arrange(jugador)%>%
     arrange(-puntos)
