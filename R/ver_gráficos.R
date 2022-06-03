@@ -2,7 +2,7 @@ ver_gráficos<-function (){
 
   último_jug<<-tabla%>%
     group_by(jugador)%>%
-    slice(which.max(fecha))
+    slice(which.max(jugados))
 
   último_jug2 <<- aggregate(último_jug$puntos, by=list(jugador=último_jug$jugador), FUN = sum)
   último_jug2 <<- as.data.frame(último_jug2)

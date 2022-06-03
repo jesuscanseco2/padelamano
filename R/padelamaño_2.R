@@ -65,8 +65,8 @@ padelamaño_2<-function(g1=NA,g2=NA,g3=NA,p1=NA,p2=NA,p3=NA, ausencia=FALSE,empa
     partidos<<-rbind(partidos,tibble(num_partido=max_partido+1,ganador_1=g1,ganador_2=ifelse(is.na(g2),NA,g2),perdedor_1=p1,perdedor_2=ifelse(is.na(p2),NA,p2),perdedor_3=ifelse(is.na(p3),NA,p3),empate=FALSE,ausencia=TRUE,fecha=ymd(fecha)))
   } else if (especial==TRUE){
 
-    ifelse(is.na(g1),nada<-"nada",tabla<<-rbind(tabla,tibble(jugador=g1,puntos=puntos_ant[1]+premio,jugados=jugados_ant[1],ganados=ganados_ant[1],empatados=empatados_ant[1],perdidos=perdidos_ant[1],fecha=ymd(fecha))))
-    ifelse(is.na(p1),nada<-"nada",tabla<<-rbind(tabla,tibble(jugador=p1,puntos=puntos_ant[4]-castigo,jugados=jugados_ant[4],ganados=ganados_ant[4],empatados=empatados_ant[4],perdidos=perdidos_ant[4],fecha=ymd(fecha))))
+    ifelse(is.na(g1),nada<-"nada",tabla<<-rbind(tabla,tibble(jugador=g1,puntos=puntos_ant[1]+premio,jugados=jugados_ant[1]+1,ganados=ganados_ant[1],empatados=empatados_ant[1]+1,perdidos=perdidos_ant[1],fecha=ymd(fecha))))
+    ifelse(is.na(p1),nada<-"nada",tabla<<-rbind(tabla,tibble(jugador=p1,puntos=puntos_ant[4]-castigo,jugados=jugados_ant[4]+1,ganados=ganados_ant[4],empatados=empatados_ant[4]+1,perdidos=perdidos_ant[4],fecha=ymd(fecha))))
 
   } else {
     tabla<<-rbind(tabla,tibble(jugador=g1,puntos=puntos_ant[1]+40*(1-1/(1+10**((promedio_perdedor-promedio_ganador)/400))),jugados=jugados_ant[1]+1,ganados=ganados_ant[1]+1,empatados=empatados_ant[1],perdidos=perdidos_ant[1],fecha=ymd(fecha)))
@@ -80,7 +80,7 @@ padelamaño_2<-function(g1=NA,g2=NA,g3=NA,p1=NA,p2=NA,p3=NA, ausencia=FALSE,empa
   # Creación de tabla general con los últimos resultados de puntos
   tabla_general<<-tabla%>%
     group_by(jugador)%>%
-    filter(jugados==max(fecha))%>%
+    filter(jugados==max(jugados))%>%
     ungroup()%>%
     arrange(jugador)%>%
     arrange(-puntos)
