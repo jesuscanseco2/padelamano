@@ -1,4 +1,4 @@
-padelamaño_2<-function(g1,g2=NA,g3=NA,p1,p2=NA,p3=NA, ausencia=FALSE,empate=FALSE,fecha=NA,premio=0,castigo=0,especial=FALSE){
+padelamaño_2<-function(g1=NA,g2=NA,g3=NA,p1=NA,p2=NA,p3=NA, ausencia=FALSE,empate=FALSE,fecha=NA,premio=0,castigo=0,especial=FALSE){
 
   jugadores_v<-c(g1,g2,g3,p1,p2,p3)
   puntos_ant<-c(0,0,0,0,0,0)
