@@ -11,15 +11,14 @@ ver_gráficos<-function (){
 
 
 
-  uno<<-ggplot(tabla,aes(fecha,puntos,color=jugador))+
-    geom_point()+
-    geom_line()+
-    facet_wrap(vars(jugador),ncol=5,nrow = 2)+
-    theme(legend.position="none",
-          axis.title.x=element_blank(),
-          axis.text.x=element_blank(),
-          axis.ticks.x=element_blank())+
-    geom_hline(yintercept=1000, linetype="dashed", color = "red")
+  uno<<-ggplot(tabla,aes(jugados,puntos,color=jugador))+
+  geom_point()+
+  geom_line()+
+  facet_wrap(vars(jugador),ncol=5,nrow = 2)+
+  theme(legend.position="none",
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  geom_hline(yintercept=1000, linetype="dashed", color = "red")
 
 
 
