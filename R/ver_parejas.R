@@ -30,7 +30,7 @@ enfrentamientos_df<<-parejas%>%
 # Parejas juntas
 enamorados<<-as.data.frame(c(parejas$pareja_ganadora,parejas$pareja_perdedora))
 names(enamorados)<-"pareja_final"
-enamorados<-enamorados%>%
+enamorados<<-enamorados%>%
   count(pareja_final)%>%
   arrange(-n)
 
