@@ -28,7 +28,7 @@ ver_gráficos<-function (){
     geom_hline(yintercept=1000, linetype="dashed", color = "red")+
     geom_text(data=último_jug,aes(label = jugador),vjust=-.5)+
     theme(legend.position="none")+
-    scale_x_continuous(breaks=seq(0,max(tabla$jugados),1))+
+    scale_x_continuous()+
     annotate("text",label=as.character(max(último_jug$fecha)),y=Inf,x=Inf,vjust=1,hjust=1)
 
 
