@@ -29,8 +29,7 @@ ver_gráficos<-function (){
     geom_text(data=último_jug,aes(label = jugador),vjust=-.5)+
     theme(legend.position="none")+
     scale_x_continuous()+
-    annotate("text",label=as.character(max(último_jug$fecha)),y=Inf,x=Inf,vjust=1,hjust=1)+
-    ggtitle("Tabla General")
+    annotate("text",label=as.character(max(último_jug$fecha)),y=Inf,x=Inf,vjust=1,hjust=1)
 
 
 
@@ -48,5 +47,4 @@ ver_gráficos<-function (){
   tabla_imagen<<-tableGrob(tabla_general[,-7])
 
   plot(tabla_imagen)
-  list(uno,dos,tres)
 }
