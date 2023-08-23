@@ -44,6 +44,32 @@ ver_gráficos<-function (){
     annotate("text",label=as.character(max(último_jug$fecha)),y=Inf,x=Inf,vjust=1,hjust=1)+
     ggtitle("Tabla General")
 
+
+hoy<-max(tabla$fecha)
+dos_meses<- hoy %m-% months(2)
+
+reciente<-tabla %>% filter(fecha>dos_meses)  %>% 
+group_by(jugador) %>% top_n(1, fecha) %>% top_n(1, jugados) %>% ungroup() %>%
+select(jugador,puntos)
+pasado<-tabla %>% filter(fecha<=dos_meses) %>% 
+group_by(jugador) %>% top_n(1, fecha) %>% top_n(1, jugados) %>% ungroup() %>%
+select(jugador,puntos)
+
+power_ranking<-left_join(reciente,pasado,by="jugador") %>% 
+mutate(puntos.x=round(puntos.x,2),
+	   puntos.y=round(puntos.y,2),
+	   diferencia=round(puntos.x-puntos.y,2))
+
+cuatro<<-ggplot(power_ranking,aes(reorder(jugador, -diferencia,sum),diferencia,fill=jugador))+
+    geom_col()+
+    coord_cartesian(ylim=c(min(power_ranking$diferencia)-10,max(power_ranking$diferencia)+10))+
+    geom_text(aes(label = diferencia),vjust=-.5)+
+    theme(legend.position="none",
+          axis.title.x=element_blank())+
+    scale_fill_hue()+
+	ggtitle("Power Ránking Últimos Dos Meses")
+
+  
   tabla_imagen<<-tableGrob(tabla_general[,-7])
 
   plot(tabla_imagen)
