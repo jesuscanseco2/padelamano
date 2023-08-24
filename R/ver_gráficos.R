@@ -90,7 +90,10 @@ tablas_generales<<-rbind(tablas_generales,tabla_diaria)
 }
 
 dias_de_lider<<-tablas_generales %>% group_by(fecha) %>% top_n(puntos,n=1) %>% ungroup() %>% group_by(jugador) %>% summarize(dias_lider=n()) %>% arrange(-dias_lider)
+dias_de_sotanero<<-tablas_generales %>% group_by(fecha) %>% top_n(puntos,n=-1) %>% ungroup() %>% group_by(jugador) %>% summarize(dias_sotanero=n()) %>% arrange(-dias_sotanero)
 tablas_generales_top<<-tablas_generales %>% group_by(fecha) %>% top_n(puntos,n=1) %>% ungroup()
+tablas_generales_down<<-tablas_generales %>% group_by(fecha) %>% top_n(puntos,n=-1) %>% ungroup()
+	
 
 cinco<<-ggplot(dias_de_lider,aes(reorder(jugador, -dias_lider,sum),dias_lider,fill=jugador))+
     geom_col()+
@@ -101,6 +104,14 @@ cinco<<-ggplot(dias_de_lider,aes(reorder(jugador, -dias_lider,sum),dias_lider,fi
     scale_fill_hue()+
 	ggtitle("Días de Líder en la Tabla General")
 
+seis<<-ggplot(dias_de_sotanero,aes(reorder(jugador, -dias_sotanero,sum),dias_sotanero,fill=jugador))+
+    geom_col()+
+    coord_cartesian(ylim=c(0,max(dias_de_sotanero$dias_sotanero)+5))+
+    geom_text(aes(label = dias_sotanero),vjust=-.5)+
+    theme(legend.position="none",
+          axis.title.x=element_blank())+
+    scale_fill_hue()+
+	ggtitle("Días de Sotanero en la Tabla General")
 	
   
   tabla_imagen<<-tableGrob(tabla_general[,-7])
