@@ -69,7 +69,7 @@ cuatro<<-ggplot(power_ranking,aes(reorder(jugador, -diferencia,sum),diferencia,f
     scale_fill_hue()+
 	ggtitle("Power Ránking Últimos Dos Meses")
 
-fechas<<-as.Date((min(tabla$fecha)+1):max(tabla$fecha))
+fechas<<-as.Date((min(tabla$fecha)+1):max(tabla$fecha), origin = "1970-01-01")
 
 tablas_generales<<-tibble()
 
